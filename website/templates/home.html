@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+{% for note in login_user.notes %}
+    <div>
+        <div class="rounded-md relative px-6 py-4 border-0 mb-4 text-white bg-indigo-500">
+            <span class="inline-block mr-5 align-middle text-xl">
+            <i class="fa fa-bell"></i>
+            </span>
+            <span class="inline-block mr-8 align-middle">
+            <b class="capitalize">({{ note.date }})</b>
+            {{ note.data }}
+            </span>
+            <button onclick="removeNote({{note.id}})" class="absolute top-0 right-0 mt-4 mr-6 leading-none bg-transparent text-2xl font-semibold">
+            &times;
+            </button>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="mx-auto w-full max-w-[550px]">
+    <br />
+    <form method="POST">
+        <div class="mb-5">
+          <label for="message" class="mb-3 block text-base font-medium text-[#07074D]">Message</label>
+          <textarea
+            rows="4"
+            name="note"
+            id="note"
+            placeholder="Type your note"
+            class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"></textarea>
+        </div>
+        <div>
+          <button class="hover:shadow-form rounded-md bg-indigo-500 py-3 px-8 text-base font-semibold text-white outline-none">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+</div>
+
+{% endblock %}
